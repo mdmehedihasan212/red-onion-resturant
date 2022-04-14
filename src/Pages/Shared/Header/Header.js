@@ -5,7 +5,7 @@ import './Header.css';
 
 const Header = () => {
     return (
-        <header className='d-flex px-5 mt-2 justify-content-between align-items-center'>
+        <header className='d-flex px-5 mt-3 mb-2 justify-content-between align-items-center'>
             <div className="logo-section">
                 <img src={logo} alt="" />
             </div>
