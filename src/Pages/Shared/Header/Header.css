@@ -1,0 +1,10 @@
+.logo-section img {
+    width: 120px;
+}
+
+.navbar a {
+    margin-right: 25px;
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+}
