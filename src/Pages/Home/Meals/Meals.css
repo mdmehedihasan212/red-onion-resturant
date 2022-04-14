@@ -1,0 +1,25 @@
+.meals-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.meals-container img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+
+.meal-cart {
+    height: 300px;
+    width: 250px;
+}
+
+.meal-cart:hover {
+    box-shadow: 5px 10px 18px lightgrey;
+}
+
+.meal-cart p {
+    text-align: center;
+    margin-bottom: 5px;
+}

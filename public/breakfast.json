@@ -1,0 +1,44 @@
+[
+    {
+        "id": "6258897344629d952a6f27a5",
+        "picture": "https://i.ibb.co/RbK3CBc/breakfast1.png",
+        "price": 8.99,
+        "name": "Eggs Benedict",
+        "about": "Lorem ipsum dolor sit amet."
+    },
+    {
+        "id": "6258897377ffd94f09f03dca",
+        "picture": "https://i.ibb.co/dkfbd1M/breakfast2.png",
+        "price": 9.99,
+        "name": "Breakfast sandwich",
+        "about": "Lorem ipsum dolor sit amet."
+    },
+    {
+        "id": "625889739fda0578628cd1df",
+        "picture": "https://i.ibb.co/ynJh4TK/breakfast3.png",
+        "price": 10.99,
+        "name": "Baked Chicken",
+        "about": "Lorem ipsum dolor sit amet."
+    },
+    {
+        "id": "62588973bb2adf4827d38101",
+        "picture": "https://i.ibb.co/JBf7hm7/breakfast4.png",
+        "price": 6.99,
+        "name": "Bpricel and cream chess",
+        "about": "Lorem ipsum dolor sit amet."
+    },
+    {
+        "id": "62588973dd2430a823d51d33",
+        "picture": "https://i.ibb.co/237H24S/breakfast5.png",
+        "price": 3.99,
+        "name": "Full Breakfast Fried Egg Toast Brunch",
+        "about": "Lorem ipsum dolor sit amet."
+    },
+    {
+        "id": "62588973f64fbb0791d12521",
+        "picture": "https://i.ibb.co/DQhZcyp/breakfast6.png",
+        "price": 19.99,
+        "name": "Toast Croissant fried egg",
+        "about": "Lorem ipsum dolor sit amet."
+    }
+]
