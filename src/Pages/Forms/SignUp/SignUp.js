@@ -6,13 +6,24 @@ import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import auth from '../../../firebase.init';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 const SignUp = () => {
     const navigate = useNavigate();
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [error, setError] = useState('');
+
+    const [userInfo, setUserInfo] = useState({
+        email: "",
+        password: "",
+    })
+
+    const [errors, setErrors] = useState({
+        email: "",
+        password: "",
+
+    })
+    // const [email, setEmail] = useState("");
+    // const [password, setPassword] = useState("");
+    // const [error, setError] = useState("");
     const [
         createUserWithEmailAndPassword,
         user,
@@ -25,28 +36,44 @@ const SignUp = () => {
         navigate('/')
     }
 
-    if (error) {
-        toast(error?.message);
-    }
+    // if (error) {
+    //     toast(error?.message);
+    // }
 
     const handleEmail = event => {
         const emailRegex = /\S+@\S+\.\S+/;
-        const verified = emailRegex.test(event.target.value);
-        if (verified) {
-            setEmail(event.target.value)
-            setError('');
+        const validEmail = emailRegex.test(event.target.value);
+        if (validEmail) {
+            // setEmail(event.target.value)
+            // setError("");
+            setUserInfo({ ...userInfo, email: event.target.value })
+            setErrors({ ...errors, email: "" })
         }
         else {
-            setError('Invalid email')
+            // setError('Invalid email')
+            setErrors({ ...errors, email: "Invalid email" })
+            setUserInfo({ ...userInfo, email: "" })
         }
     }
     const handlePassword = event => {
-        setPassword(event.target.value)
+        const passwordRegex = /(?=.*[a-zA-Z >>!#$%&? "<<])[a-zA-Z0-9 >>!#$%&?<< ]/;
+        const validPassword = passwordRegex.test(event.target.value);
+        if (validPassword) {
+            // setPassword(event.target.value)
+            // setError("")
+            setUserInfo({ ...userInfo, password: event.target.value })
+            setErrors({ ...errors, password: "" })
+        }
+        else {
+            // setError('Please provide minimum one special character');
+            setErrors({ ...errors, password: "Please provide minimum one special character" })
+            setUserInfo({ ...userInfo, password: "" })
+        }
     }
 
     const handleSubmit = event => {
         event.preventDefault();
-        createUserWithEmailAndPassword(email, password)
+        // createUserWithEmailAndPassword(email, password)
         console.log('submit');
     }
 
@@ -58,19 +85,21 @@ const SignUp = () => {
                     <Form.Control type="text" placeholder="Name" required />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
-                    <Form.Control onBlur={handleEmail} type="email" placeholder="Email" required />
+                    <Form.Control onFocus={handleEmail} type="email" placeholder="Email" required />
                 </Form.Group>
+                {errors?.email && <p>{errors.email}</p>}
                 <Form.Group className="mb-3" controlId="formBasicPassword">
-                    <Form.Control onBlur={handlePassword} type="password" placeholder="Password" required />
+                    <Form.Control onFocus={handlePassword} type="password" placeholder="Password" required />
+                    {errors?.password && <p className='error-message'>{errors.password}</p>}
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formConfirmPassword">
                     <Form.Control type="password" placeholder="Confirm Password" required />
                 </Form.Group>
-                <p className='text-danger text-center'>{error}</p>
+                {/* <p className='text-danger text-center'>{error}</p> */}
                 <Button variant="primary" className='w-100' type="submit">
                     Sign up
                 </Button>
-                <p className='form-text text-primary text-center mt-3'>Already have an account</p>
+                <Link to={'/login'} className='form-text text-primary text-center mt-3'>Already have an account</Link>
             </Form>
             <ToastContainer />
         </div>

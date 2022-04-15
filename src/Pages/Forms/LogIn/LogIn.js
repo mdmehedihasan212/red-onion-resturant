@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import img from '../../../Assets/images/logo2.png';
 import auth from '../../../firebase.init';
@@ -49,7 +49,7 @@ const LogIn = () => {
                 <Button variant="primary" className='w-100' type="submit">
                     Login
                 </Button>
-                <p className='form-text text-primary text-center mt-3'>Please register</p>
+                <Link to={'/signup'} className='form-text text-primary text-center mt-3'>Please register</Link>
             </Form>
         </div>
     );
