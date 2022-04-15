@@ -10,6 +10,7 @@ import { useNavigate, Link } from 'react-router-dom';
 
 const SignUp = () => {
     const navigate = useNavigate();
+    const [showPassword, setShowPassword] = useState(false);
 
     const [userInfo, setUserInfo] = useState({
         email: "",
@@ -33,9 +34,11 @@ const SignUp = () => {
     ] = useCreateUserWithEmailAndPassword(auth, { sendEmailVerification: true });
 
 
-    if (user) {
-        navigate('/')
-    }
+    useEffect(() => {
+        if (user) {
+            navigate('/')
+        }
+    }, [])
 
     // if (error) {
     //     toast(error?.message);
@@ -71,8 +74,23 @@ const SignUp = () => {
         }
         else {
             // setError('Please provide minimum one special character');
-            setErrors({ ...errors, password: "Please provide minimum one special character" })
+            setErrors({ ...errors, password: "Please give minimum one special character" })
             setUserInfo({ ...userInfo, password: "" })
+        }
+    }
+
+    const handleConfirmPassword = event => {
+
+        if (event.target.value === userInfo.password) {
+            // setPassword(event.target.value)
+            // setError("")
+            setUserInfo({ ...userInfo, confirmPassword: event.target.value })
+            setErrors({ ...errors, confirmPassword: "" })
+        }
+        else {
+            // setError('Please provide minimum one special character');
+            setErrors({ ...errors, confirmPassword: "Password doesn't matched" })
+            setUserInfo({ ...userInfo, confirmPassword: "" })
         }
     }
 
@@ -96,7 +114,7 @@ const SignUp = () => {
                 break;
 
             default:
-                toast("Something went wrong")
+            // toast("Something went wrong")
         }
     }, [firebaseError])
 
@@ -112,18 +130,23 @@ const SignUp = () => {
                     {errors?.email && <p className='error-message'>{errors.email}</p>}
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formBasicPassword">
-                    <Form.Control onChange={handlePassword} type="password" placeholder="Password" required />
+
+                    <div className='password-field'>
+                        <Form.Control onChange={handlePassword} type={showPassword ? "text" : "password"} placeholder="Password" required />
+                        <p onClick={() => setShowPassword(!showPassword)} className='password-simble'>X</p>
+                    </div>
+
                     {errors?.password && <p className='error-message'>{errors.password}</p>}
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formConfirmPassword">
-                    <Form.Control type="password" placeholder="Confirm Password" required />
+                    <Form.Control onChange={handleConfirmPassword} type="password" placeholder="Confirm Password" required />
                 </Form.Group>
-                {/* {errors?.confirmPassword && <p>{errors.confirmPassword}</p>} */}
+                {errors?.confirmPassword && <p className='error-message'>{errors.confirmPassword}</p>}
                 {/* <p className='text-danger text-center'>{error}</p> */}
                 <Button variant="primary" className='w-100' type="submit">
                     Sign up
                 </Button>
-                <Link to={'/login'} className='form-text text-primary text-center mt-3'>Already have an account</Link>
+                <p className='form-text text-center mt-3'>Already have an account! <Link to={'/login'}>Please Login</Link></p>
             </Form>
             <ToastContainer />
         </div>

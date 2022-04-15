@@ -49,7 +49,7 @@ const LogIn = () => {
                 <Button variant="primary" className='w-100' type="submit">
                     Login
                 </Button>
-                <Link to={'/signup'} className='form-text text-primary text-center mt-3'>Please register</Link>
+                <p className='form-text text-center mt-3'>Don't have an account! <Link to={'/signup'}>Please register</Link></p>
             </Form>
         </div>
     );

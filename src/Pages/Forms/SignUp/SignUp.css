@@ -7,11 +7,31 @@
 }
 
 .form-text {
+    font-size: 1em;
     cursor: pointer;
+    color: black;
+}
+
+.form-text a {
+    text-decoration: none;
 }
 
 .error-message {
     text-align: center;
     color: red;
     margin: 5px 0px;
+}
+
+.error-message::before {
+    content: "X ";
+}
+
+.password-field {
+    position: relative;
+}
+
+.password-simble {
+    position: absolute;
+    top: 5px;
+    right: 20px;
 }
