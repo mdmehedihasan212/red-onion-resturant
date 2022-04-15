@@ -7,6 +7,7 @@ import auth from '../../../firebase.init';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate, Link } from 'react-router-dom';
+import SocialSignIn from '../../Shared/SocialSignIn/SocialSignIn';
 
 const SignUp = () => {
     const navigate = useNavigate();
@@ -130,16 +131,17 @@ const SignUp = () => {
                     {errors?.email && <p className='error-message'>{errors.email}</p>}
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formBasicPassword">
-
                     <div className='password-field'>
                         <Form.Control onChange={handlePassword} type={showPassword ? "text" : "password"} placeholder="Password" required />
                         <p onClick={() => setShowPassword(!showPassword)} className='password-simble'>X</p>
                     </div>
-
                     {errors?.password && <p className='error-message'>{errors.password}</p>}
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formConfirmPassword">
-                    <Form.Control onChange={handleConfirmPassword} type="password" placeholder="Confirm Password" required />
+                    <div className='password-field'>
+                        <Form.Control onChange={handleConfirmPassword} type={showPassword ? "text" : "password"} placeholder="Confirm Password" required />
+                        <p onClick={() => setShowPassword(!showPassword)} className='password-simble'>X</p>
+                    </div>
                 </Form.Group>
                 {errors?.confirmPassword && <p className='error-message'>{errors.confirmPassword}</p>}
                 {/* <p className='text-danger text-center'>{error}</p> */}
@@ -149,6 +151,7 @@ const SignUp = () => {
                 <p className='form-text text-center mt-3'>Already have an account! <Link to={'/login'}>Please Login</Link></p>
             </Form>
             <ToastContainer />
+            <SocialSignIn></SocialSignIn>
         </div>
     );
 };

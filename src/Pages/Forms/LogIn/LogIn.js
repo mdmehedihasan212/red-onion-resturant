@@ -5,6 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import img from '../../../Assets/images/logo2.png';
 import auth from '../../../firebase.init';
+import SocialSignIn from '../../Shared/SocialSignIn/SocialSignIn';
 
 const LogIn = () => {
     const [email, setEmail] = useState('');
@@ -51,6 +52,7 @@ const LogIn = () => {
                 </Button>
                 <p className='form-text text-center mt-3'>Don't have an account! <Link to={'/signup'}>Please register</Link></p>
             </Form>
+            <SocialSignIn></SocialSignIn>
         </div>
     );
 };
