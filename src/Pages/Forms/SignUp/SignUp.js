@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import img from '../../../Assets/images/logo2.png';
 import { Button, Form } from 'react-bootstrap';
 import './SignUp.css';
@@ -14,12 +14,13 @@ const SignUp = () => {
     const [userInfo, setUserInfo] = useState({
         email: "",
         password: "",
+        confirmPassword: "",
     })
 
     const [errors, setErrors] = useState({
         email: "",
         password: "",
-
+        confirmPassword: "",
     })
     // const [email, setEmail] = useState("");
     // const [password, setPassword] = useState("");
@@ -28,7 +29,7 @@ const SignUp = () => {
         createUserWithEmailAndPassword,
         user,
         loading,
-        hookError,
+        firebaseError,
     ] = useCreateUserWithEmailAndPassword(auth, { sendEmailVerification: true });
 
 
@@ -38,6 +39,10 @@ const SignUp = () => {
 
     // if (error) {
     //     toast(error?.message);
+    // }
+
+    // if (userInfo.password !== userInfo.confirmPassword) {
+    //     setErrors("Password Do not match")
     // }
 
     const handleEmail = event => {
@@ -73,9 +78,27 @@ const SignUp = () => {
 
     const handleSubmit = event => {
         event.preventDefault();
-        // createUserWithEmailAndPassword(email, password)
+        createUserWithEmailAndPassword(userInfo.email, userInfo.password)
         console.log('submit');
     }
+
+    useEffect(() => {
+        // if (firebaseError) {
+        //     toast(firebaseError.message)
+        // }
+        switch (firebaseError?.code) {
+            case "auth/invalid-email":
+                toast("Please valid email");
+                break;
+
+            case "auth/invalid-password":
+                toast("Please valid password");
+                break;
+
+            default:
+                toast("Something went wrong")
+        }
+    }, [firebaseError])
 
     return (
         <div className='w-25 mx-auto'>
@@ -85,16 +108,17 @@ const SignUp = () => {
                     <Form.Control type="text" placeholder="Name" required />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
-                    <Form.Control onFocus={handleEmail} type="email" placeholder="Email" required />
+                    <Form.Control onChange={handleEmail} type="email" placeholder="Email" required />
+                    {errors?.email && <p className='error-message'>{errors.email}</p>}
                 </Form.Group>
-                {errors?.email && <p>{errors.email}</p>}
                 <Form.Group className="mb-3" controlId="formBasicPassword">
-                    <Form.Control onFocus={handlePassword} type="password" placeholder="Password" required />
+                    <Form.Control onChange={handlePassword} type="password" placeholder="Password" required />
                     {errors?.password && <p className='error-message'>{errors.password}</p>}
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formConfirmPassword">
                     <Form.Control type="password" placeholder="Confirm Password" required />
                 </Form.Group>
+                {/* {errors?.confirmPassword && <p>{errors.confirmPassword}</p>} */}
                 {/* <p className='text-danger text-center'>{error}</p> */}
                 <Button variant="primary" className='w-100' type="submit">
                     Sign up
