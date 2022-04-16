@@ -20,14 +20,18 @@ const Header = () => {
                 <img src={logo} alt="" />
             </div>
             <nav className='navbar'>
-                <Link to={'/'}>Cart</Link>
+                <Link to={'/'}>Home</Link>
+                <Link to={'/cart'}>Cart</Link>
                 {
                     !user ?
-                        <Link to={'/login'}>Login</Link>
+                        <div>
+                            <Link to={'/login'}>Login</Link>
+                            <Link className='btn btn-primary text-white rounded-pill px-4' to={'/signup'}>Sign up</Link>
+                        </div>
                         :
                         <Link onClick={handleSignOut} to={'/login'}>Sign out</Link>
                 }
-                <Link className='btn btn-primary text-white rounded-pill px-4' to={'/signup'}>Sign up</Link>
+
             </nav>
         </header>
     );

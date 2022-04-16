@@ -1,5 +1,5 @@
 // import React, { useState } from 'react';
-import { useSignInWithGoogle } from 'react-firebase-hooks/auth';
+import { useSignInWithFacebook, useSignInWithGithub, useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import auth from '../../../firebase.init';
 import google from '../../../Assets/images/social/google.png';
 import facebook from '../../../Assets/images/social/facebook.png';
@@ -7,8 +7,9 @@ import github from '../../../Assets/images/social/github.png';
 
 const SocialSignIn = () => {
     // const [error,setError]=useState("");
-    const [signInWithGoogle, user, loading, error] = useSignInWithGoogle(auth);
-
+    const [signInWithGoogle] = useSignInWithGoogle(auth);
+    const [signInWithFacebook] = useSignInWithFacebook(auth);
+    const [signInWithGithub] = useSignInWithGithub(auth);
     // if(error){
     // SpeechSynthesisErrorEvent()
 
@@ -19,9 +20,11 @@ const SocialSignIn = () => {
     }
 
     const FacebookSignIN = () => {
+        signInWithFacebook();
     }
 
     const GithubSignIn = () => {
+        signInWithGithub();
     }
     return (
         <section>
@@ -31,16 +34,16 @@ const SocialSignIn = () => {
                 <div className='border-top w-50'></div>
             </article>
             <article>
-                <div className='mt-3'>
-                    <p onClick={GoogleSignIn} className='btn btn-primary w-25 mx-2'>
+                <div className='d-flex mt-3 justify-content-between'>
+                    <p onClick={GoogleSignIn} className='btn btn-outline-primary w-25 mx-2'>
                         <img src={google} alt="google" />
-                        Google Sign in</p>
-                    <p onClick={FacebookSignIN} className='btn btn-primary w-25 mx-2'>
+                        Google</p>
+                    <p onClick={FacebookSignIN} className='btn btn-outline-primary w-25 mx-2 px-0'>
                         <img src={facebook} alt="facebook" />
-                        Facebook Sign in</p>
-                    <p onClick={GithubSignIn} className='btn btn-primary w-25 mx-2'>
+                        Facebook</p>
+                    <p onClick={GithubSignIn} className='btn btn-outline-primary w-25 mx-2'>
                         <img src={github} alt="github" />
-                        Github Sign in</p>
+                        Github</p>
                 </div>
             </article>
         </section>
